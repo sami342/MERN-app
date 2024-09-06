@@ -21,11 +21,14 @@ mongoose
 const __dirname=path.resolve();
 
 const app = expresss();
-app.use(expresss.static(path.join(__dirname,'/client/dist')))
+// Serve static files from the React app
+app.use(expresss.static(path.join(__dirname, 'client/build')));
 
-app.get('*',(req,res)=>{
-  res.sendFile(path.join(__dirname,'client','dist','index.html'))
-})
+// Serve the index.html file for all routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
+
 app.use(
   cors({
     origin: process.env.FRONT_END_URL,
